@@ -35,7 +35,7 @@ module.exports = {
 
 function createFieldConfig (Type, field, resolveFn) {
   return {
-    type: Type,
+    type: field.required ? new GraphQLNonNull(Type) : Type,
     resolve: (entity, _, ctx) => {
       const fieldValue = _get(entity, ['fields', field.id], NOTHING);
       if (fieldValue !== NOTHING) {
